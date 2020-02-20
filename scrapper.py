@@ -6,7 +6,7 @@ URL = 'https://elmercio.com/politica/'
 page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
-project_href = [i['href'] for i in soup.find_all('a', href=True)]
+project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
 print(project_href)
 
 for i in range(2,4):
@@ -14,14 +14,14 @@ for i in range(2,4):
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-    project_href = [i['href'] for i in soup.find_all('a', href=True)]
+    project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
     print(project_href)
 
 URL = 'https://elmercio.com/sociedad/'
 page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
-project_href = [i['href'] for i in soup.find_all('a', href=True)]
+project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
 print(project_href)
 
 for i in range(2,3):
@@ -29,14 +29,14 @@ for i in range(2,3):
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-    project_href = [i['href'] for i in soup.find_all('a', href=True)]
+    project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
     print(project_href)
 
 URL = 'https://elmercio.com/internacional/'
 page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
-project_href = [i['href'] for i in soup.find_all('a', href=True)]
+project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
 print(project_href)
 
 for i in range(2,3):
@@ -44,5 +44,7 @@ for i in range(2,3):
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-    project_href = [i['href'] for i in soup.find_all('a', href=True)]
+    project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
     print(project_href)
+
+    
