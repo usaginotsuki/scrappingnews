@@ -1,50 +1,32 @@
 import requests
-from selenium import webdriver
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+from title-news import sacarTitulo
 
-URL = 'https://elmercio.com/politica/'
-page = requests.get(URL)
+def sacarLinks(url):
+    # Getting the webpage, creating a Response object.
+    response = requests.get(url)
 
-soup = BeautifulSoup(page.content, 'html.parser')
-project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
-print(project_href)
+    # Extracting the source code of the page.
+    data = response.text
 
-for i in range(2,4):
-    URL = 'https://elmercio.com/politica/page'+str(i)
-    page = requests.get(URL)
+    # Passing the source code to BeautifulSoup to create a BeautifulSoup object for it.
+    soup = BeautifulSoup(data, 'lxml')
 
-    soup = BeautifulSoup(page.content, 'html.parser')
-    project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
-    print(project_href)
+    # Extracting all the <a> tags into a list.
+    tags = soup.find_all('a')
 
-URL = 'https://elmercio.com/sociedad/'
-page = requests.get(URL)
+    # Extracting URLs from the attribute href in the <a> tags.
+    for tag in tags:
+        url = (urlparse(tag.get('href')))
+        path = url.path
+        if (
+        url.netloc) == 'elmercio.com' and path != '/internacional/' and path != '' and path != '/?s=' and path != '/politica/' and path!='/sociedad/' and path!='/necflis/' and path!='/deportes/':
+            tags = (tag.get('href'))
+            print(tags)
 
-soup = BeautifulSoup(page.content, 'html.parser')
-project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
-print(project_href)
 
-for i in range(2,3):
-    URL = 'https://elmercio.com/sociedad/'+str(i)
-    page = requests.get(URL)
+for i in range(2, 4):
+    (sacarLinks("https://elmercio.com/politica/page/" + str(i)))
 
-    soup = BeautifulSoup(page.content, 'html.parser')
-    project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
-    print(project_href)
-
-URL = 'https://elmercio.com/internacional/'
-page = requests.get(URL)
-
-soup = BeautifulSoup(page.content, 'html.parser')
-project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
-print(project_href)
-
-for i in range(2,3):
-    URL = 'https://elmercio.com/internacional/'+str(i)
-    page = requests.get(URL)
-
-    soup = BeautifulSoup(page.content, 'html.parser')
-    project_href = [i['href'] for i in soup.find_all('a', href=True) if i['href'] != "#"]
-    print(project_href)
-
-    
+sacarTitulo(https://elmercio.com/jorge-yunda-abandona-alcaldia-por-presidencia-el-nacional/)
